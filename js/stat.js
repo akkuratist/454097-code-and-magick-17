@@ -28,6 +28,7 @@ window.renderStatistics = function (ctx, players, times) {
   var barOffset = BAR_WIDTH + BAR_GAP;
   var statsBasicPositionX = CLOUD_X + BAR_WIDTH + 5;
   var statsBasicPositionY = CLOUD_Y + CLOUD_HEIGHT;
+  var statsPositionX = 0;
 
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -43,14 +44,15 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
     var barHeight = (BAR_MAXHEIGHT * times[i]) / maxTime;
+    statsPositionX = statsBasicPositionX + (barOffset * i);
     ctx.fillStyle = 'black';
     times[i] = Math.round(times[i]);
-    ctx.fillText(times[i], statsBasicPositionX + barOffset * i, statsBasicPositionY - FONT_GAP * 1.5);
-    ctx.fillText(players[i], statsBasicPositionX + barOffset * i, statsBasicPositionY - FONT_GAP * 3 - barHeight);
+    ctx.fillText(times[i], statsPositionX, statsBasicPositionY - FONT_GAP * 1.5);
+    ctx.fillText(players[i], statsPositionX, statsBasicPositionY - FONT_GAP * 3 - barHeight);
     ctx.fillStyle = 'rgba(0, 0, ' + Math.round(255 * Math.random()) + ', ' + Math.random() + ')';
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    ctx.fillRect(statsBasicPositionX + barOffset * i, statsBasicPositionY - (BAR_MAXHEIGHT + FONT_GAP * 2) + BAR_MAXHEIGHT - barHeight, BAR_WIDTH, barHeight);
+    ctx.fillRect(statsPositionX, statsBasicPositionY - (BAR_MAXHEIGHT + FONT_GAP * 2) + BAR_MAXHEIGHT - barHeight, BAR_WIDTH, barHeight);
   }
 };
