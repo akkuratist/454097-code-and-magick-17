@@ -17,6 +17,35 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+
+var userNameInput = setup.querySelector('.setup-user-name');
+var coatColorInput = setup.querySelector('input[name="coat-color"]');
+var eyesColorInput = setup.querySelector('input[name="eyes-color"]');
+var fireballColorInput = setup.querySelector('input[name="fireball-color"]');
+
+var wizardCoat = setup.querySelector('.wizard-coat');
+var wizardEyes = setup.querySelector('.wizard-eyes');
+var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
 var getRandomElement = function (array) {
   return array[Math.round(Math.random() * (array.length - 1))];
 };
@@ -54,36 +83,6 @@ var renderWizards = function () {
 };
 
 renderWizards();
-
-
-var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = setup.querySelector('.setup-close');
-
-var userNameInput = setup.querySelector('.setup-user-name');
-var coatColorInput = setup.querySelector('input[name="coat-color"]');
-var eyesColorInput = setup.querySelector('input[name="eyes-color"]');
-var fireballColorInput = setup.querySelector('input[name="fireball-color"]');
-
-var wizardCoat = setup.querySelector('.wizard-coat');
-var wizardEyes = setup.querySelector('.wizard-eyes');
-var wizardFireball = setup.querySelector('.setup-fireball-wrap');
-
-var openPopup = function () {
-  setup.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscPress);
-};
-
-var closePopup = function () {
-  setup.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
-};
-
-var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
-  }
-};
 
 setupOpen.addEventListener('click', function () {
   openPopup();
@@ -126,6 +125,7 @@ userNameInput.addEventListener('input', function (evt) {
     target.setCustomValidity('');
   }
 });
+
 
 var toggleStyle = function (styleToChange, styleInput, STYLE_VALUES) {
   styleToChange.style.fill = getRandomElement(STYLE_VALUES);
