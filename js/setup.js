@@ -5,12 +5,10 @@ var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '�
 var WIZARD_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARD_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-var ENTER_KEYCODE = 13;
-var ESC_KEYCODE = 27;
-
-
-// var userDialog = document.querySelector('.setup');
-// userDialog.classList.remove('hidden');
+var KEYCODES = {
+  ENTER: 13,
+  ESC: 27
+};
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -41,7 +39,7 @@ var closePopup = function () {
 };
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === KEYCODES.ESC) {
     closePopup();
   }
 };
@@ -79,7 +77,6 @@ var renderWizards = function () {
     fragment.appendChild(renderWizard(wizards[i]));
   }
   similarListElement.appendChild(fragment);
-  // userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
 
 renderWizards();
@@ -89,7 +86,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (evt.keyCode === KEYCODES.ENTER) {
     openPopup();
   }
 });
@@ -99,7 +96,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
+  if (evt.keyCode === KEYCODES.ENTER) {
     closePopup();
   }
 });
